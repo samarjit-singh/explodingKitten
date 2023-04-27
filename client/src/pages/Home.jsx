@@ -4,8 +4,10 @@ import Defusecard from "../Cards/Defusecard";
 import Explodecard from "../Cards/Explodecard";
 import Shufflecard from "../Cards/Shufflecard";
 import Gameboard from "../components/Gameboard";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const { score } = useSelector((state) => state.counter);
   return (
     <div>
       {/* header */}
@@ -29,7 +31,7 @@ const Home = () => {
           </span>
           <span className="flex">
             <p className="font-semibold">Score:</p>
-            <p className="ml-2 font-bold text-purple-700">5</p>
+            <p className="ml-2 font-bold text-purple-700">{score}</p>
           </span>
         </div>
         <div></div>
