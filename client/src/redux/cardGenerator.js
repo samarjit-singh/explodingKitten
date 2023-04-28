@@ -1,6 +1,6 @@
 const generateCard = () => {
   const cardObjects = {
-    1: "CAT",
+    1: "KITTEN",
     2: "DEFUSE",
     3: "SHUFFLE",
     4: "EXPLODE",

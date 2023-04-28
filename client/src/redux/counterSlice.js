@@ -28,7 +28,7 @@ export const counterSlice = createSlice({
     flippedCard: (state, action) => {
       let cards = state.cardArray.pop();
       state.card = cards;
-      if (state.card === "CAT") {
+      if (state.card === "KITTEN") {
         state.result = "SAFE";
         state.emoji = "😸";
       } else if (state.card === "DEFUSE") {
