@@ -1,14 +1,12 @@
 import React from "react";
-import EmptyCard from "../Cards/EmptyCard";
 import { useSelector, useDispatch } from "react-redux";
 import { flippedCard, startGame } from "../redux/counterSlice";
 
-import Catcard from "../Cards/Catcard";
 
 const Gameboard = () => {
   const dispatch = useDispatch();
 
-  const { card, result, defuseCardNumber, cardArray } = useSelector(
+  const { card, result, defuseCardNumber, cardArray, emoji } = useSelector(
     (state) => state.counter
   );
 
@@ -20,9 +18,9 @@ const Gameboard = () => {
       </div>
       <div className="flex ml-[10rem]">
         <div>
-          <EmptyCard />
-          {/* {card === "Cat Card" ? <EmptyCard /> : <Catcard />} */}
-          {/* <p>New Card</p> */}
+          <div className="border-2 h-20 w-16 rounded-lg bg-orange-100">
+            <p className="ml-[0.65rem] mt-3 text-[30px] ">{emoji}</p>
+          </div>
           <p>{card}</p>
         </div>
         <div className="ml-10 mt-7">{result}</div>

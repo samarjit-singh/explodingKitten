@@ -13,6 +13,7 @@ export const counterSlice = createSlice({
     card: "NEW CARDS",
     result: "",
     score: 0,
+    emoji: "🃏",
   },
   reducers: {
     startGame: (state) => {
@@ -21,17 +22,21 @@ export const counterSlice = createSlice({
       state.defuseCardNumber = 0;
       state.result = "RESULT";
       state.card = "NEW CARDS";
+      state.emoji = "🃏";
       console.log(state.cardArray);
     },
     flippedCard: (state, action) => {
       let cards = state.cardArray.pop();
       state.card = cards;
-      if (state.card === "Cat card") {
+      if (state.card === "CAT") {
         state.result = "SAFE";
-      } else if (state.card === "Defuse card") {
+        state.emoji = "😸";
+      } else if (state.card === "DEFUSE") {
+        state.emoji = "🙅‍♂️";
         state.defuseCardNumber += 1;
         state.result = "DEFUSE";
-      } else if (state.card === "Explode card") {
+      } else if (state.card === "EXPLODE") {
+        state.emoji = "💣";
         if (state.defuseCardNumber > 0) {
           state.defuseCardNumber -= 1;
           state.result = "Added Defused Card";
@@ -40,6 +45,7 @@ export const counterSlice = createSlice({
           state.cardArray = makeCard();
         }
       } else if (state.card === "Shuffle card") {
+        state.emoji = "🔀";
         state.result = "START AGAIN";
         state.defuseCardNumber = 0;
         state.cardArray = makeCard();

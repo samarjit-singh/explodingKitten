@@ -1,9 +1,9 @@
 const generateCard = () => {
   const cardObjects = {
-    1: "Cat card",
-    2: "Defuse card",
-    3: "Shuffle card",
-    4: "Explode card",
+    1: "CAT",
+    2: "DEFUSE",
+    3: "SHUFFLE",
+    4: "EXPLODE",
   };
   let cardArray = [];
   const randomNumber = () => Math.floor(Math.random() * (5 - 1) + 1);
