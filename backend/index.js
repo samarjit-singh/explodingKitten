@@ -39,37 +39,58 @@ app.post("/user", (req, res) => {
     return res.status(400).send("Username is required");
   }
   // Store the username in Redis
-  client.set("users", JSON.stringify(value), (err, reply) => {
+  client.set(value.user, JSON.stringify(value), (err, reply) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Error creating user");
     }
     console.log(`User ${username} created`);
-    res.send("User created");
+    return res.json({ status: true, value });
   });
 });
 
 // updating the score
-app.post("/update-score", (req, res) => {
+app.post("/update-score", async (req, res) => {
   const { username, score } = req.body;
-  const value = {
-    user: username,
-    gameWon: score,
-  };
 
   // Check if the request body contains the username and score properties
   if (!username || !score) {
     return res.status(400).send("Username and score are required");
   }
-
+  const value = {
+    user: username,
+    gameWon: score,
+  };
   // Update the user's score in Redis
-  client.set("users", JSON.stringify(value), (err, reply) => {
+  client.set(value.user, JSON.stringify(value), (err, reply) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Error updating score");
     }
     console.log(`Score for user ${username} updated to ${score}`);
-    res.send(`Score updated for user ${username}`);
+    return res.json({ status: true, value });
+  });
+});
+
+// getting score
+app.get("/score/:username", (req, res) => {
+  const username = req.params.username;
+
+  // Check if the username is provided
+  if (!username) {
+    return res.status(400).send("Username is required");
+  }
+
+  // Retrieve the score for the given username from Redis
+  client.get(username, (err, score) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Error retrieving score");
+    }
+    const jsonObj = JSON.parse(score);
+    console.log(JSON.stringify(jsonObj));
+    console.log(`Score for user ${username} is ${jsonObj.gameWon}`);
+    return res.json({ status: true, score: jsonObj.gameWon });
   });
 });
 
