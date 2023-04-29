@@ -7,9 +7,8 @@ export const counterSlice = createSlice({
   name: "counter",
   initialState: {
     cardArray: [],
-    cardFlipped: "Flip the Card",
     defuseCardNumber: 0,
-    card: "NEW CARDS",
+    card: "CARDS",
     result: "",
     score: 0,
     emoji: "🃏",
@@ -20,7 +19,7 @@ export const counterSlice = createSlice({
       state.cardFlipped = "Flip";
       state.defuseCardNumber = 0;
       state.result = "RESULT";
-      state.card = "NEW CARDS";
+      state.card = "CARDS";
       state.emoji = "🃏";
       console.log(state.cardArray);
     },
@@ -38,28 +37,25 @@ export const counterSlice = createSlice({
         state.emoji = "💣";
         if (state.defuseCardNumber > 0) {
           state.defuseCardNumber -= 1;
-          state.result = "Added Defused Card";
+          state.result = "DEFUSED";
         } else {
           state.result = "GAME OVER";
           state.cardArray = makeCard();
         }
-      } else if (state.card === "Shuffle card") {
+      } else if (state.card === "SHUFFLE") {
         state.emoji = "🔀";
-        setTimeout(() => {
-          const Function = () => {
-            state.result = "START AGAIN";
-            state.defuseCardNumber = 0;
-            state.cardArray = makeCard();
-            console.log("Hello world!");
-          };
-          Function();
-        }, 2000);
+        state.result = "START AGAIN";
+        state.defuseCardNumber = 0;
+        state.cardArray = makeCard();
+
+        console.log("Hello world!");
       } else if (state.cardArray.length === 0) {
         state.defuseCardNumber = 0;
         state.cardArray = makeCard();
-        state.result = "RESULT";
-        state.card = "NEW CARDS";
+        state.result = "GAME WON";
+        state.card = "CARDS";
         state.score += 1;
+        state.emoji = "🃏";
       }
     },
   },

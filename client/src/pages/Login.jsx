@@ -52,7 +52,7 @@ const Login = () => {
     <div className="h-[100vh] w-[100vw] inline-flex justify-center align-middle gap-[1rem] bg-[#131324]">
       <form
         onSubmit={(event) => handleSubmit(event)}
-        className="flex flex-col h-[20vh] w-[80vw] sm:h-[30vh] sm:w-[30vw] mt-40  gap-[2rem] bg-white rounded-lg border-2 p-2"
+        className="flex flex-col h-[25vh] w-[80vw] sm:h-[30vh] sm:w-[30vw] mt-40  gap-[2rem] bg-white rounded-lg border-2 p-2"
       >
         <div className="flex align-middle gap-[1rem] justify-center">
           <h1 className="font-semibold">😸 Exploding Kitten</h1>
