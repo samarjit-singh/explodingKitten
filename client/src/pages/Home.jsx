@@ -5,9 +5,10 @@ import Explodecard from "../Cards/Explodecard";
 import Shufflecard from "../Cards/Shufflecard";
 import Gameboard from "../components/Gameboard";
 import { useSelector } from "react-redux";
-
+import { updateScoreRoute } from "../utils/APIRoutes";
 
 import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -27,27 +28,26 @@ const Home = () => {
         setUserScore(data.gameWon);
       };
       fetchCurrentUser();
-      console.log("current user " + currentUser);
+      // console.log("current user " + currentUser);
     }
   }, [navigate]);
 
-  useEffect(() => {
-    if (currentUser) {
-      const fetchUserScore = async () => {
-        await axios
-          .get(`http://localhost:5000/score/${currentUser}`)
-          .then(function (response) {
-            // handle success
-            console.log("hello my score is  " + response.data);
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          });
+  useEffect(
+    (event) => {
+      const updateScore = async () => {
+        const newScore = score + userScore;
+        const username = currentUser;
+        const Score = newScore;
+        const { data } = await axios.post(updateScoreRoute, {
+          username,
+          Score,
+        });
+        console.log("updated score" + data);
       };
-      fetchUserScore();
-    }
-  }, []);
+      updateScore();
+    },
+    [score]
+  );
 
   return (
     <div>
@@ -72,7 +72,9 @@ const Home = () => {
           </span>
           <span className="flex">
             <p className="font-semibold">Score:</p>
-            <p className="ml-2 font-bold text-purple-700">{userScore}</p>
+            <p className="ml-2 font-bold text-purple-700">
+              {userScore + score}
+            </p>
           </span>
         </div>
         <div></div>

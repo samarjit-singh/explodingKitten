@@ -33,6 +33,7 @@ app.post("/login", (req, res) => {
   if (username) {
     client.get(username, (err, reply) => {
       if (err) console.log(err);
+      console.log(reply);
       if (reply != null) {
         console.log("User already Created");
         const value = JSON.parse(reply);
@@ -61,15 +62,15 @@ app.post("/login", (req, res) => {
 // updating the score
 // ###############################################
 app.post("/update-score", async (req, res) => {
-  const { username, score } = req.body;
+  const { username, Score } = req.body;
 
   // Check if the request body contains the username and score properties
-  if (!username || !score) {
+  if (!username || !Score) {
     return res.status(400).send("Username and score are required");
   }
   const value = {
     user: username,
-    gameWon: score,
+    gameWon: Score,
   };
   // Update the user's score in Redis
   client.set(value.user, JSON.stringify(value), (err, reply) => {
@@ -77,32 +78,8 @@ app.post("/update-score", async (req, res) => {
       console.error(err);
       return res.status(500).send("Error updating score");
     }
-    console.log(`Score for user ${username} updated to ${score}`);
+    console.log(`Score for user ${username} updated to ${Score}`);
     return res.json({ status: true, value });
-  });
-});
-
-// ###############################################
-// get score
-// ###############################################
-app.get("/score/:username", (req, res) => {
-  const username = req.params.username;
-
-  // Check if the username is provided
-  if (!username) {
-    return res.status(400).send("Username is required");
-  }
-
-  // Retrieve the score for the given username from Redis
-  client.get(username, (err, score) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error retrieving score");
-    }
-    const jsonObj = JSON.parse(score);
-    console.log(JSON.stringify(jsonObj));
-    console.log(`Score for user ${username} is ${jsonObj.gameWon}`);
-    return res.json({ status: true, score: jsonObj.gameWon });
   });
 });
 
