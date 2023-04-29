@@ -25,8 +25,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // API
-
+// ###############################################
 // setting user
+// ###############################################
 app.post("/user", (req, res) => {
   const { username } = req.body;
   const gameWon = 0;
@@ -49,7 +50,9 @@ app.post("/user", (req, res) => {
   });
 });
 
+// ###############################################
 // updating the score
+// ###############################################
 app.post("/update-score", async (req, res) => {
   const { username, score } = req.body;
 
@@ -72,7 +75,9 @@ app.post("/update-score", async (req, res) => {
   });
 });
 
-// getting score
+// ###############################################
+// get score
+// ###############################################
 app.get("/score/:username", (req, res) => {
   const username = req.params.username;
 
@@ -94,5 +99,5 @@ app.get("/score/:username", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

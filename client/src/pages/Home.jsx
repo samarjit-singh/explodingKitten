@@ -14,7 +14,7 @@ const Home = () => {
       <div className="flex flex-col h-[40vh] w-[100vw] justify-evenly">
         <div>
           <h1 className="font-bold text-[30px] ml-[35rem]">
-            😸 Exploding Kitten{" "}
+            😸 Exploding Kitten
           </h1>
           <div className="flex gap-2 ml-[35.4rem] mt-10">
             <Catcard />
