@@ -43,7 +43,7 @@ app.post("/login", (req, res) => {
         });
       } else {
         console.log("Creating new User");
-        client.set(username, JSON.stringify({ username, gameWon: 0 }));
+        client.set(username, JSON.stringify({ user: username, gameWon: 0 }));
         res.json({
           status: true,
           value: {
@@ -86,16 +86,16 @@ app.post("/update-score", async (req, res) => {
 // ###############################################
 // get all users
 // ###############################################
-app.get('/keys', (req, res) => {
-  client.keys('*', (err, keys) => {
+app.get("/keys", (req, res) => {
+  client.keys("*", (err, keys) => {
     if (err) {
       console.error(err);
-      res.status(500).send('Internal Server Error');
+      res.status(500).send("Internal Server Error");
     } else {
       client.mget(keys, (err, values) => {
         if (err) {
           console.error(err);
-          res.status(500).send('Internal Server Error');
+          res.status(500).send("Internal Server Error");
         } else {
           const data = {};
           const users = [];
@@ -113,11 +113,6 @@ app.get('/keys', (req, res) => {
     }
   });
 });
-
-
-
-
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

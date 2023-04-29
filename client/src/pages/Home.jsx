@@ -26,7 +26,6 @@ const Home = () => {
         setUserScore(data.gameWon);
       };
       fetchCurrentUser();
-      // console.log("current user " + currentUser);
     }
   }, [navigate]);
 
@@ -58,7 +57,10 @@ const Home = () => {
       <div className="flex flex-col h-[100vh] w-[300vh] sm:h-[100vh] sm:w-[100vw] justify-evenly bg-[#131324]">
         <div>
           <span>
-            <p onClick={handleClick} className="ml-80 sm:ml-[70rem] sm:mt-4 cursor-pointer">
+            <p
+              onClick={handleClick}
+              className="ml-80 sm:ml-[70rem] sm:mt-4 cursor-pointer"
+            >
               ❌
             </p>
             <h1 className="font-bold text-[30px] ml-12 sm:ml-[35rem] text-white">

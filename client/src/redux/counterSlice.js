@@ -62,43 +62,34 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  startGame,
-  flippedCard,
-  removeCard,
-  defuseCard,
-  catCard,
-  shuffleCard,
-  gameOver,
-  gameresultult,
-} = counterSlice.actions;
+export const { startGame, flippedCard } = counterSlice.actions;
 
-export const flipCard = () => (dispatch, getState) => {
-  const { cardArray, defuseCardNumber } = getState().card;
-  const card = cardArray[cardArray.length - 1];
-  dispatch(flippedCard({ cardFlipped: card }));
-  if (card === "Cat card") dispatch(catCard());
-  if (card === "Defuse card")
-    dispatch(defuseCard({ defuseCardNumber: 1, result: "Added Defuse Card" }));
-  if (card === "Exploding kitten card") {
-    if (defuseCardNumber !== 0)
-      dispatch(
-        defuseCard({ defuseCardNumber: -1, result: "Defuse Card Used" })
-      );
-    else {
-      dispatch(gameOver());
-      setTimeout(() => dispatch(startGame()), 2000);
-    }
-  }
-  if (card === "Shuffle card") {
-    dispatch(shuffleCard());
-    setTimeout(() => dispatch(startGame()), 1300);
-  }
-  if (cardArray.length === 0) {
-    dispatch(gameresultult());
-    setTimeout(() => dispatch(startGame()), 2000);
-  }
-  dispatch(removeCard());
-};
+// export const flipCard = () => (dispatch, getState) => {
+//   const { cardArray, defuseCardNumber } = getState().card;
+//   const card = cardArray[cardArray.length - 1];
+//   dispatch(flippedCard({ cardFlipped: card }));
+//   if (card === "Cat card") dispatch(catCard());
+//   if (card === "Defuse card")
+//     dispatch(defuseCard({ defuseCardNumber: 1, result: "Added Defuse Card" }));
+//   if (card === "Exploding kitten card") {
+//     if (defuseCardNumber !== 0)
+//       dispatch(
+//         defuseCard({ defuseCardNumber: -1, result: "Defuse Card Used" })
+//       );
+//     else {
+//       dispatch(gameOver());
+//       setTimeout(() => dispatch(startGame()), 2000);
+//     }
+//   }
+//   if (card === "Shuffle card") {
+//     dispatch(shuffleCard());
+//     setTimeout(() => dispatch(startGame()), 1300);
+//   }
+//   if (cardArray.length === 0) {
+//     dispatch(gameresultult());
+//     setTimeout(() => dispatch(startGame()), 2000);
+//   }
+//   dispatch(removeCard());
+// };
 
 export default counterSlice.reducer;
