@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { userRoute } from "../utils/APIRoutes";
+import { loginRoute } from "../utils/APIRoutes";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -20,13 +21,13 @@ const Login = () => {
     event.preventDefault();
     if (handleValidation()) {
       const { username } = values;
-      const { data } = await axios.post(userRoute, { username });
+      const { data } = await axios.post(loginRoute, { username });
       console.log(data);
       if (data.status === false) {
         console.log(data.msg);
       }
       if (data.status === true) {
-        localStorage.setItem("app-user", JSON.stringify(data.username));
+        localStorage.setItem("app-user", JSON.stringify(data.value));
         navigate("/");
       }
     }

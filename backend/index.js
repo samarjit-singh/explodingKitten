@@ -26,28 +26,35 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // API
 // ###############################################
-// setting user
+// Login user
 // ###############################################
-app.post("/user", (req, res) => {
-  const { username } = req.body;
-  const gameWon = 0;
-  const value = {
-    user: username,
-    gameWon: gameWon,
-  };
-  // Check if the request body contains the username property
-  if (!username) {
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  if (username) {
+    client.get(username, (err, reply) => {
+      if (err) console.log(err);
+      if (reply != null) {
+        console.log("User already Created");
+        const value = JSON.parse(reply);
+        res.json({
+          status: true,
+          value,
+        });
+      } else {
+        console.log("Creating new User");
+        client.set(username, JSON.stringify({ username, gameWon: 0 }));
+        res.json({
+          status: true,
+          value: {
+            user: username,
+            gameWon: 0,
+          },
+        });
+      }
+    });
+  } else {
     return res.status(400).send("Username is required");
   }
-  // Store the username in Redis
-  client.set(value.user, JSON.stringify(value), (err, reply) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error creating user");
-    }
-    console.log(`User ${username} created`);
-    return res.json({ status: true, value });
-  });
 });
 
 // ###############################################
@@ -98,6 +105,8 @@ app.get("/score/:username", (req, res) => {
     return res.json({ status: true, score: jsonObj.gameWon });
   });
 });
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
