@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import * as types from "./types";
 import makeCard from "./cardGenerator";
 
 // startGame is an action
@@ -46,9 +45,15 @@ export const counterSlice = createSlice({
         }
       } else if (state.card === "Shuffle card") {
         state.emoji = "🔀";
-        state.result = "START AGAIN";
-        state.defuseCardNumber = 0;
-        state.cardArray = makeCard();
+        setTimeout(() => {
+          const Function = () => {
+            state.result = "START AGAIN";
+            state.defuseCardNumber = 0;
+            state.cardArray = makeCard();
+            console.log("Hello world!");
+          };
+          Function();
+        }, 2000);
       } else if (state.cardArray.length === 0) {
         state.defuseCardNumber = 0;
         state.cardArray = makeCard();
