@@ -30,32 +30,37 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // ###############################################
 app.post("/login", (req, res) => {
   const username = req.body.username;
-  if (username) {
-    client.get(username, (err, reply) => {
-      if (err) console.log(err);
-      console.log(reply);
-      if (reply != null) {
-        console.log("User already Created");
-        const value = JSON.parse(reply);
-        res.json({
-          status: true,
-          value,
-        });
-      } else {
-        console.log("Creating new User");
-        client.set(username, JSON.stringify({ user: username, gameWon: 0 }));
-        res.json({
-          status: true,
-          value: {
-            user: username,
-            gameWon: 0,
-          },
-        });
-      }
-    });
-  } else {
-    return res.status(400).send("Username is required");
+  if (
+    !username ||
+    typeof username !== "string" ||
+    username.trim().length === 0
+  ) {
+    return res
+      .status(400)
+      .send("Username is required and must be a non-empty string");
   }
+  client.get(username, (err, reply) => {
+    if (err) console.log(err);
+    console.log(reply);
+    if (reply != null) {
+      console.log("User already Created");
+      const value = JSON.parse(reply);
+      res.json({
+        status: true,
+        value,
+      });
+    } else {
+      console.log("Creating new User");
+      client.set(username, JSON.stringify({ user: username, gameWon: 0 }));
+      res.json({
+        status: true,
+        value: {
+          user: username,
+          gameWon: 0,
+        },
+      });
+    }
+  });
 });
 
 // ###############################################
