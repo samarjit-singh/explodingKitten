@@ -2,14 +2,6 @@
 
 ###😸 Exploding Kitten 
 
-## Table of Contents
-
-- [Project Name](#😸 Exploding Kitten )
-- [Installation](#installation)
-  -[Exploding Kitten Game Client](#client)
-  -[Exploding Kitten Game Backend](#backend)
-- [Usage](#usage)
-
 ## Getting Started
 
 A single player Exploding Kitten Game written in React.js, Node.js, Express.js & Redis.
