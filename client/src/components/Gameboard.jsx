@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { flippedCard, startGame } from "../redux/counterSlice";
+import { Link } from "react-router-dom";
 
 const Gameboard = () => {
   const dispatch = useDispatch();
@@ -10,10 +11,10 @@ const Gameboard = () => {
   );
 
   return (
-    <div className="border-2 rounded-lg ml-10 sm:ml-[25rem] h-[16rem] mb-40 w-[19rem] sm:w-[40rem] ">
+    <div className="border-2 rounded-lg ml-10 sm:ml-[25rem] h-[19rem] mb-40 w-[19rem] sm:w-[40rem] ">
       {/* heading */}
       <div>
-        <h1 className="text-[20px] mt-4 ml-20 sm:ml-[16rem] font-bold text-white">
+        <h1 className="text-[20px] mt-4 ml-24 sm:ml-[16rem] font-bold text-white">
           Game Board
         </h1>
       </div>
@@ -28,7 +29,9 @@ const Gameboard = () => {
           </span>
         </div>
         {/* result */}
-        <div className="mt-7 w-16 ml-10 sm:ml-20 font-bold text-white">{result}</div>
+        <div className="mt-7 w-16 ml-10 sm:ml-20 font-bold text-white">
+          {result}
+        </div>
         {/* status */}
         <div className="mt-3 ml-8 sm:ml-20 w-28">
           <div>
@@ -57,6 +60,11 @@ const Gameboard = () => {
       >
         FLIP
       </button>
+      <Link to="/leaderboard">
+        <button className="font-bold border-2 bg-blue-400 text-white w-32 rounded-lg mt-2 ml-20 sm:ml-[16rem]">
+          Leaderboard
+        </button>
+      </Link>
       {/* Game */}
     </div>
   );

@@ -29,19 +29,22 @@ const Home = () => {
     }
   }, [navigate]);
 
-  useEffect((event) => {
-    const updateScore = async () => {
-      const newScore = score + userScore;
-      const username = currentUser;
-      const Score = newScore;
-      const { data } = await axios.post(updateScoreRoute, {
-        username,
-        Score,
-      });
-      console.log("updated score" + data);
-    };
-    updateScore();
-  }, []);
+  useEffect(
+    (event) => {
+      const updateScore = async () => {
+        const newScore = score + userScore;
+        const username = currentUser;
+        const Score = newScore;
+        const { data } = await axios.post(updateScoreRoute, {
+          username,
+          Score,
+        });
+        console.log("updated score" + data);
+      };
+      updateScore();
+    },
+    [score]
+  );
 
   const handleClick = async () => {
     localStorage.clear();
@@ -83,7 +86,6 @@ const Home = () => {
               {userScore + score}
             </p>
           </span>
-          
         </div>
         {/* main game */}
         <div>

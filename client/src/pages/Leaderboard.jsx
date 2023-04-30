@@ -26,7 +26,7 @@ const Leaderboard = () => {
       };
       getData();
     }
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="overflow-hidden">
