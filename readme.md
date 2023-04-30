@@ -1,6 +1,4 @@
-# Project Name
-
-###😸 Exploding Kitten 
+# 😸 Exploding Kitten 
 
 ## Getting Started
 
