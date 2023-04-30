@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { leaderboardRoute } from "../utils/APIRoutes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const Leaderboard = () => {
@@ -31,6 +31,11 @@ const Leaderboard = () => {
   return (
     <div className="overflow-hidden">
       <div className="w-[100%] h-[100vh] sm:w-[216vh] relative flex justify-center align-middle bg-[#131324]">
+        <Link to="/home">
+          <p className="ml-64 text-[30px] sm:ml-[70rem] sm:mt-4 cursor-pointer">
+            🔙
+          </p>
+        </Link>
         <div className="absolute">
           <h1 className="font-bold text-[30px] mt-10 text-white">
             Leaderboard
@@ -39,7 +44,10 @@ const Leaderboard = () => {
             {users.length > 0 ? (
               <ul className="mt-10">
                 {users.map((user, index) => (
-                  <li key={index} className="border-2 flex rounded-lg p-1  mt-5">
+                  <li
+                    key={index}
+                    className="border-2 flex rounded-lg p-1  mt-5"
+                  >
                     <span className="text-white w-20 font-bold">
                       <p>{user.user}</p>
                     </span>
@@ -50,7 +58,7 @@ const Leaderboard = () => {
                 ))}
               </ul>
             ) : (
-              <p>Loading...</p>
+              <p className="text-white">Loading...</p>
             )}
           </div>
         </div>
