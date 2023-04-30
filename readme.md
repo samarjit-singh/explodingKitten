@@ -19,7 +19,7 @@ For running the server application you need to install reddis client in your mac
 
 ```terminal
 $ npm install
-$ nodemon
+$ npm run start
 ```
 
 
